@@ -1,0 +1,35 @@
+ul{
+    list-style: none;
+}
+#main{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+#main .contain{
+    margin-top: 170px;
+    /* border:1px solid red; */
+}
+.Line{
+    
+    color:rgb(90.9%, 91.2%, 91.7%);
+}
+.Line label,.Line span.text-primary{
+    text-decoration: line-through;
+    color:rgb(71.6%, 71.8%, 72.2%);
+}
+td>input.form-control{
+    display: none;
+}
+.edit>div{
+    display: none;
+}
+td.edit>input{
+    display:inline;
+}
+td>.checkbox input[type=checkbox]{
+    margin-left:0;
+}
+.table>tbody>tr>td.text-right{
+    vertical-align: middle;
+}
