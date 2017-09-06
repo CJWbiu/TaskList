@@ -9,7 +9,7 @@ var storage={
 };
 var state={
     all:function(list){
-        console.log(1);
+        // console.log(1);
         $('a[href="#all"]').parent()
         .addClass('active').siblings().removeClass('active');
         return list;
@@ -31,11 +31,16 @@ var state={
         });
     }
 };
+if(typeof localStorage.getItem('myStyle')!='string'){
+    localStorage.setItem('myStyle','{"isBlack":false}');
+}
 
+console.log(mystyle)
 var now=new Date();
 var beforeTime=now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate();
 
 var list=storage.fetch();
+var mystyle=JSON.parse(localStorage.getItem('myStyle')).isBlack;
 var vm=new Vue({
     el:"#main",
     data:{
@@ -44,7 +49,8 @@ var vm=new Vue({
         editable:'',
         beforeEdit:'',//修改前
         visibility:'all',
-        date:beforeTime
+        date:beforeTime,
+        isBlack:mystyle
     },
     methods:{
         addList:function(){
@@ -70,6 +76,10 @@ var vm=new Vue({
         cancelEdit:function(item){
             item.text=this.beforeEdit;
             this.editable='';
+        },
+        changeStyle:function(){
+            this.isBlack=!this.isBlack;
+            localStorage.setItem('myStyle',JSON.stringify({isBlack:this.isBlack}));
         }
     },
     computed:{
@@ -84,7 +94,7 @@ var vm=new Vue({
             }).length;
         },
         filterList:function(){
-            console.log(this.visibility)
+            // console.log(this.visibility)
             return state[this.visibility]?state[this.visibility](list):list;
         }
     },
@@ -98,8 +108,9 @@ var vm=new Vue({
         date:{
             handler:function(){
                 if(this.date!=beforeTime){
+                    console.log(1)
                     for(var i=0;i<this.list.length;i++){
-                        console.log(5)
+                        
                         this.list[i].isChecked=false;
                     }
                 }
