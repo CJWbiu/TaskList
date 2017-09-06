@@ -68,10 +68,11 @@ var vm=new Vue({
             var _this=this;
             _this.list.splice(index,1);
         },
-        editTodo:function(todo){
-            this.beforeEdit=todo.text;
-            this.editable=todo;
-        },
+        // editTodo:function(todo){
+        //     console.log(2)
+        //     this.beforeEdit=todo.text;
+        //     this.editable=todo;
+        // },
         complete:function(){
             this.editable='';
         },
@@ -88,8 +89,10 @@ var vm=new Vue({
                 this.clickedTime.timeA=new Date();
                 this.long++;
             }else if(this.long==2){
+                console.log(1);
                 this.clickedTime.timeB=new Date();
                 if(Math.abs(this.clickedTime.timeA-this.clickedTime.timeB)<400){
+                    this.beforeEdit=todo.text;
                     this.editable=todo;
                 }else{
                     this.clickedTime.timeA=new Date();
