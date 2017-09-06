@@ -22,12 +22,12 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                         </button>
-                    <a class="navbar-brand" href="#">每日任务　 <span class="text-primary">{{date}}</span></a>
+                    <a class="navbar-brand" href="#">每日任务　 <span class="text-primary" v-bind:class="{'text-danger':msg}">{{myTime}}</span></a>
                     
                 </div>
                
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="输入需要添加的任务并按回车键添加" v-on:keyup.enter="addList" v-model="addTodo">
+                    <input type="text" class="form-control" placeholder="输入需要添加的任务并按回车键添加" v-on:keyup.enter="addList" v-model="addTodo" v-on:blur="hideMsg">
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-left" id="collapse-1">
