@@ -50,7 +50,9 @@ var vm=new Vue({
         beforeEdit:'',//修改前
         visibility:'all',
         date:beforeTime,
-        isBlack:mystyle
+        isBlack:mystyle,
+        long:1,
+        clickedTime:{'timeA':'','timeB':''}
     },
     methods:{
         addList:function(){
@@ -80,6 +82,19 @@ var vm=new Vue({
         changeStyle:function(){
             this.isBlack=!this.isBlack;
             localStorage.setItem('myStyle',JSON.stringify({isBlack:this.isBlack}));
+        },
+        touch:function(todo){
+            if(this.long==1){
+                this.clickedTime.timeA=new Date();
+                this.long++;
+            }else if(this.long==2){
+                this.clickedTime.timeB=new Date();
+                if(Math.abs(this.clickedTime.timeA-this.clickedTime.timeB)<400){
+                    this.editable=todo;
+                }else{
+                    this.clickedTime.timeA=new Date();
+                }
+            }
         }
     },
     computed:{
