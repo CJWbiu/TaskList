@@ -50,7 +50,9 @@
                         <div class="checkbox">
                             <input type="checkbox"
                                 v-model="todo.isChecked">
-                            <label v-on:dblclick="editTodo(todo)" class="text-info">
+                            <label v-on:dblclick="editTodo(todo)" 
+                                v-on:click="touch(todo)"
+                                class="text-info">
                                 {{todo.text}}
                             </label>
                         </div>
