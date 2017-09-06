@@ -44,7 +44,7 @@ var vm=new Vue({
         editable:'',
         beforeEdit:'',//修改前
         visibility:'all',
-        date:now
+        date:beforeTime
     },
     methods:{
         addList:function(){
