@@ -36,6 +36,7 @@ if(typeof localStorage.getItem('myStyle')!='string'){
 }
 
 console.log(mystyle)
+var msg="内容不能为空！";
 var now=new Date();
 var beforeTime=now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate();
 
@@ -44,7 +45,9 @@ var mystyle=JSON.parse(localStorage.getItem('myStyle')).isBlack;
 var vm=new Vue({
     el:"#main",
     data:{
+        myTime:beforeTime,
         list:list,
+        msg:false,
         addTodo:'',
         editable:'',
         beforeEdit:'',//修改前
@@ -56,23 +59,27 @@ var vm=new Vue({
     },
     methods:{
         addList:function(){
-            this.list.push({
-                text:this.addTodo,
-                isChecked:false,
-                time:this.date
-            });
-            this.addTodo='';
+           
+            if(this.addTodo==''){
+                this.msg=true;
+                this.myTime=msg;
+            }else{
+                this.list.push({
+                    text:this.addTodo,
+                    isChecked:false,
+                    time:this.date
+                });
+                this.addTodo='';
+                this.msg=false;
+                this.myTime=beforeTime;
+            }
+            
         },
         deleteTodo:function(todo){
             var index=this.list.indexOf(todo);
             var _this=this;
             _this.list.splice(index,1);
         },
-        // editTodo:function(todo){
-        //     console.log(2)
-        //     this.beforeEdit=todo.text;
-        //     this.editable=todo;
-        // },
         complete:function(){
             this.editable='';
         },
@@ -98,6 +105,10 @@ var vm=new Vue({
                     this.clickedTime.timeA=new Date();
                 }
             }
+        },
+        hideMsg:function(){
+            this.msg=false;
+            this.myTime=beforeTime;
         }
     },
     computed:{
