@@ -97,7 +97,7 @@ var vm=new Vue({
             this.isBlack=!this.isBlack;
             localStorage.setItem('myStyle',JSON.stringify({isBlack:this.isBlack}));
         },
-        touch:function(todo){   模拟双击
+        touch:function(todo){   //模拟双击
             if(this.long==1){
                 this.clickedTime.timeA=new Date();
                 this.long++;
