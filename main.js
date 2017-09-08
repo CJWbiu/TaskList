@@ -40,17 +40,13 @@ var msg="内容不能为空！";
 var now=new Date();
 var beforeTime=now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate();
 
-var times={ 
-    hours:now.getHours(),
-    minutes:now.getMinutes(),
-    second:now.getSeconds()
-};
 
 var list=storage.fetch();
 var mystyle=JSON.parse(localStorage.getItem('myStyle')).isBlack;
 var vm=new Vue({
     el:"#main",
     data:{
+        dataTime:'2017/9/8',    //初始化时间
         myTime:beforeTime,
         list:list,
         msg:false,
@@ -150,16 +146,14 @@ function watchHashChange(){
 function createTime(){  //更新时间
     var time=new Date();
     vm.date=time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate();
-    times.hours=time.getHours();
-    times.minutes=time.getMinutes();
-    times.second=time.getSeconds();
-    // console.log(times)
-    if(times.hours==0 && times.minutes==0 && times.second==0){  //0点0分0秒更新
+
+    if(vm.date!==vm.dataTime){  //0点0分0秒更新
        console.log(1)
         for(var i=0;i<vm.list.length;i++){
             
             vm.list[i].isChecked=false; //刷新任务
         }
+        vm.dataTime=vm.date;//重置时间
     }
 }
 createTime();
