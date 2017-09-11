@@ -31,11 +31,16 @@ var state={ //切换视图
         });
     }
 };
+if(!localStorage.time){
+    
+    localStorage.time="2017/9/8";
+    console.log("time is createed");
+}
 if(typeof localStorage.getItem('myStyle')!='string'){   //初始化主题
     localStorage.setItem('myStyle','{"isBlack":false}');
 }
 
-console.log(mystyle)
+
 var msg="内容不能为空！";
 var now=new Date();
 var beforeTime=now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate();
@@ -46,7 +51,7 @@ var mystyle=JSON.parse(localStorage.getItem('myStyle')).isBlack;
 var vm=new Vue({
     el:"#main",
     data:{
-        dataTime:'2017/9/8',    //初始化时间
+        dataTime:localStorage.time,    //初始化时间
         myTime:beforeTime,
         list:list,
         msg:false,
@@ -146,14 +151,16 @@ function watchHashChange(){
 function createTime(){  //更新时间
     var time=new Date();
     vm.date=time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate();
-
     if(vm.date!==vm.dataTime){  //0点0分0秒更新
-       console.log(1)
+        console.log(vm.dataTime)
+        console.log(vm.date)
+        console.log("update state")
         for(var i=0;i<vm.list.length;i++){
             
             vm.list[i].isChecked=false; //刷新任务
         }
         vm.dataTime=vm.date;//重置时间
+        localStorage.time=vm.date;
     }
 }
 createTime();
